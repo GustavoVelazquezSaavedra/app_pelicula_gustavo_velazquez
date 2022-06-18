@@ -1,6 +1,5 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
+import 'package:peliculas/widgets/casting_cards.dart';
 
 class DetallesScreens extends StatelessWidget {
   const DetallesScreens({Key? key}) : super(key: key);
@@ -14,7 +13,14 @@ class DetallesScreens extends StatelessWidget {
           SliverList(
               delegate: SliverChildListDelegate([
             _PosterAndTitle(),
-          ]))
+            _Overview(),
+            _Overview(),
+            _Overview(),
+            _Overview(),
+            _Overview(),
+            _Overview(),
+            CastingCards()
+          ])),
         ],
       ),
     );
@@ -46,7 +52,8 @@ class _CustomAppBar extends StatelessWidget {
         ),
         background: FadeInImage(
           placeholder: AssetImage('assets/loading.gif'),
-          image: NetworkImage('https://via.placeholder.com/500x300'),
+          image: NetworkImage(
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiyOs5LXK3cUC0lTkuauDW9oHX7v2QDIiNog&usqp=CAU'),
           fit: BoxFit.cover,
         ),
       ),
@@ -68,7 +75,8 @@ class _PosterAndTitle extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: FadeInImage(
               placeholder: AssetImage('assets/no-image.jpg'),
-              image: NetworkImage('https://via.placeholder.com/200x300'),
+              image: NetworkImage(
+                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiyOs5LXK3cUC0lTkuauDW9oHX7v2QDIiNog&usqp=CAU'),
               height: 150,
             ),
           ),
@@ -109,6 +117,19 @@ class _PosterAndTitle extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class _Overview extends StatelessWidget {
+  const _Overview({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      child: Text(
+          'Et reprehenderit irure do eiusmod mollit voluptate fugiat sint mollit anim id dolor laborum. Consectetur enim consequat in non exercitation culpa. Tempor esse labore qui sint ullamco nisi.'),
     );
   }
 }
