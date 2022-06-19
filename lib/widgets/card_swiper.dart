@@ -1,8 +1,14 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:peliculas/models/movie.dart';
 
 class CardSwiper extends StatelessWidget {
-  const CardSwiper({Key? key}) : super(key: key);
+  //crear la variable para para estirar  las imagenes
+  final List<Movie> movies;
+
+  const CardSwiper({Key? key, required this.movies}) : super(key: key);
+
+  //const CardSwiper({Key? key, this.movies}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +19,15 @@ class CardSwiper extends StatelessWidget {
       height: size.height * 0.5,
       //color: Colors.red,
       child: Swiper(
-        itemCount: 10,
+        itemCount: movies.length,
         layout: SwiperLayout.STACK,
         itemWidth: size.width * 0.6,
         itemHeight: size.height * 0.4,
         itemBuilder: (_, int index) {
+          //
+          final movie = movies[index];
+          print(movie.fullposterImg);
+          //
           return GestureDetector(
             onTap: () => Navigator.popAndPushNamed(context, 'detalles',
                 arguments: 'movie-instance'),
@@ -27,9 +37,7 @@ class CardSwiper extends StatelessWidget {
                 placeholder: AssetImage(
                   'assets/no-image.jpg',
                 ),
-                image: NetworkImage(
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiyOs5LXK3cUC0lTkuauDW9oHX7v2QDIiNog&usqp=CAU'),
-              ),
+                image: NetworkImage(movie.fullposterImg)
             ),
           );
         },
