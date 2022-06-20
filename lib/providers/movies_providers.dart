@@ -23,7 +23,7 @@ class MoviesProviders extends ChangeNotifier {
     print('MoviesProviders inizializado');
 
     this.getOnDisplayMovies();
-    this.getOnDisplayMovies();
+    this.getPopularMovies();
   }
 
   getOnDisplayMovies() async {

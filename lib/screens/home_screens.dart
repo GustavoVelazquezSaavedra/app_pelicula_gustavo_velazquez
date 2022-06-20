@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 class HomeScreens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final MoviesProviders = Provider.of<MoviesProviders>(context);
+    final moviesProviders = Provider.of<MoviesProviders>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Peliculas en cines'),
@@ -22,9 +22,9 @@ class HomeScreens extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(children: [
-          CardSwiper(movies: MoviesProviders.OndisplayMovies),
+          CardSwiper(movies: moviesProviders.OnDisplayMovies),
           MovieSlider(
-            movies: MoviesProviders.Popularmovie,
+            movies: moviesProviders.Popularmovie,
             title: 'Populares',
           )
         ]),
