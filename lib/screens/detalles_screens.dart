@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:peliculas/models/movie.dart';
 import 'package:peliculas/widgets/casting_cards.dart';
@@ -10,15 +8,12 @@ class DetallesScreens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 //
-  final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;  
-
-
-
+    final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
 
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          _CustomAppBar(movie),   
+          _CustomAppBar(movie),
           SliverList(
               delegate: SliverChildListDelegate([
             _PosterAndTitle(movie),
@@ -28,7 +23,7 @@ class DetallesScreens extends StatelessWidget {
             _Overview(movie),
             _Overview(movie),
             _Overview(movie),
-            CastingCards()
+            CastingCards(movie.id),
           ])),
         ],
       ),
@@ -37,10 +32,8 @@ class DetallesScreens extends StatelessWidget {
 }
 
 class _CustomAppBar extends StatelessWidget {
-
-
 //
-final Movie movie;
+  final Movie movie;
 
   const _CustomAppBar(this.movie);
 //
@@ -59,13 +52,12 @@ final Movie movie;
           alignment: Alignment.bottomCenter,
           padding: EdgeInsets.only(bottom: 10),
           color: Colors.black12,
-          child: Text(movie.title, 
-  
+          child: Text(
+            movie.title,
             style: TextStyle(fontSize: 16),
             textAlign: TextAlign.center,
-            ),
           ),
-        
+        ),
         background: FadeInImage(
           placeholder: AssetImage('assets/loading.gif'),
           image: NetworkImage(movie.fullbackdropPath),
@@ -77,18 +69,15 @@ final Movie movie;
 }
 
 class _PosterAndTitle extends StatelessWidget {
+  final Movie movie;
 
-
-final Movie movie;
-
-  const _PosterAndTitle(this.movie)
-
+  const _PosterAndTitle(this.movie);
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
-     return Container(
+    return Container(
       margin: EdgeInsets.only(top: 20),
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -97,7 +86,7 @@ final Movie movie;
             borderRadius: BorderRadius.circular(20),
             child: FadeInImage(
               placeholder: AssetImage('assets/no-image.jpg'),
-              image: NetworkImage(movie.fullposterImg),  
+              image: NetworkImage(movie.fullposterImg),
               height: 150,
             ),
           ),
@@ -107,7 +96,6 @@ final Movie movie;
           ConstrainedBox(
             constraints: BoxConstraints(maxWidth: size.width - 190),
             child: Column(
-              
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -147,13 +135,9 @@ final Movie movie;
 }
 
 class _Overview extends StatelessWidget {
+  final Movie movie;
 
- 
-final Movie movie;
-
-
- const _Overview(this.movie);
-
+  const _Overview(this.movie);
 
   @override
   Widget build(BuildContext context) {
