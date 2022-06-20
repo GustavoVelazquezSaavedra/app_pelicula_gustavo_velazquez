@@ -43,9 +43,6 @@ class _CustomAppBar extends StatelessWidget {
 final Movie movie;
 
   const _CustomAppBar(this.movie);
-
-
-
 //
   @override
   Widget build(BuildContext context) {
