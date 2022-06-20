@@ -36,9 +36,9 @@ class MoviesProviders extends ChangeNotifier {
 
     final nowPlayinResponse = Nowplayingresponse.fromJson(response.body);
 
-    print(Nowplayingresponse.results[1].title);
+    print(nowPlayinResponse.results[1].title);
 
-    Ondisplaymovies = Nowplayingresponse.results;
+    Ondisplaymovies = nowPlayinResponse.results;
 
     notifyListeners();
   }
