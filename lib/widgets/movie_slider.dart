@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:peliculas/models/movie.dart';
 
 class MovieSlider extends StatelessWidget {
-  const MovieSlider({Key? key}) : super(key: key);
+  //crear variable para mostrar las imagines
+  final List<Movie> movies;
+  final String? title;
+
+  const MovieSlider({Key? key, required this.movies, this.title})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +19,10 @@ class MovieSlider extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
+            //if(this.widget.title != null)
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Text(
-              'Populares',
+              this.title!,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
@@ -25,8 +32,8 @@ class MovieSlider extends StatelessWidget {
           Expanded(
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 20,
-                  itemBuilder: (_, int index) => _MoviePoster()))
+                  itemCount: movies.length,
+                  itemBuilder: (_, int index) => _MoviePoster(movies[index])))
         ],
       ),
     );
@@ -34,7 +41,10 @@ class MovieSlider extends StatelessWidget {
 }
 
 class _MoviePoster extends StatelessWidget {
-  const _MoviePoster({Key? key}) : super(key: key);
+  //crear las variables para manejar los datos del Movie
+  final Movie movie;
+
+  const _MoviePoster(this.movie);
 
   @override
   Widget build(BuildContext context) {
@@ -46,16 +56,18 @@ class _MoviePoster extends StatelessWidget {
       child: Column(
         children: [
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, 'detalles',
-                arguments: 'movie-instance'),
+            onTap: () => Navigator.pushNamed(
+              context,
+              'detalles',
+              arguments: movie,
+            ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: FadeInImage(
                 placeholder: AssetImage(
                   'assets/no-image.jpg',
                 ),
-                image: NetworkImage(
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiyOs5LXK3cUC0lTkuauDW9oHX7v2QDIiNog&usqp=CAU'),
+                image: NetworkImage(movie.fullposterImg),
                 width: 130,
                 height: 190,
                 fit: BoxFit.cover,
@@ -66,7 +78,7 @@ class _MoviePoster extends StatelessWidget {
             height: 5,
           ),
           Text(
-            'start: El regreso',
+            movie.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,

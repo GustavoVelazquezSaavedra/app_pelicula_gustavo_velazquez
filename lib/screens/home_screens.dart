@@ -23,8 +23,11 @@ class HomeScreens extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(children: [
-          CardSwiper(Movies: MoviesProviders.OndisplayMovies),
-          MovieSlider()
+          CardSwiper(movies: MoviesProviders.OndisplayMovies),
+          MovieSlider(
+            movies: MoviesProviders.Popularmovie,
+            title: 'Populares',
+          )
         ]),
       ),
     );
