@@ -51,10 +51,10 @@ class MoviesProviders extends ChangeNotifier {
 
     final response = await http.get(url);
 
-    final PopularResponse = PopularResponse.fromJson(response.body);
+    final popularResponse = PopularResponse.fromJson(response.body);
 
     //print(Nowplayingresponse.results[1].title);
-    Popularmovie = [...Popularmovie, ...PopularResponse.results];
+    Popularmovie = [...Popularmovie, ...popularResponse.results];
 
     notifyListeners();
   }
